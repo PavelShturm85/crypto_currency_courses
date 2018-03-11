@@ -1,0 +1,34 @@
+{% extends 'exchange_rates/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Дата последнего обновления</th>
+            <th>Название валюты</th>
+            <th>Курс валюты</th>
+        </tr>
+    </thead>
+    <tbody class="paleblue">
+        {% if currency %}
+            {% for coin in currency %}
+            
+                <tr>
+                    <td>{{ coin.last_updated}}</td>
+                    <td>{{ coin.name}}</td>
+                    <td>{{ coin.price_usd }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+<form action="" method="get">
+        {{form.as_p}}
+        <input type="date">
+        <input type="submit" value="Поиск">
+    </form>
+{% load bootstrap3 %}
+{% bootstrap_pagination currency %}
+{% endblock %}
